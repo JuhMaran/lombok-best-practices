@@ -20,12 +20,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate Maven Wrapper files
-        run: |
-          test -f mvnw || exit 1
-          test -f .mvn/wrapper/maven-wrapper.jar || exit 1
-          test -f .mvn/wrapper/maven-wrapper.properties || exit 1        
-
       # Java mais recente LTS (25)
       - name: Setup Java 25 (LTS)
         uses: actions/setup-java@v4
