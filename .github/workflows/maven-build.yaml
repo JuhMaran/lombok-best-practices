@@ -1,0 +1,62 @@
+name: Build Spring Boot with Maven
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/**/*'
+
+jobs:
+  build_and_verify:
+    name: Run Merge Checks
+    runs-on: ubuntu-latest
+
+    permissions:
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Java mais recente LTS (25)
+      - name: Setup Java 25 (LTS)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          architecture: x64
+          cache: maven
+
+      # Garantir execução no Linux runner
+      - name: Grant execute permission for mvnw
+        run: chmod +x mvnw
+
+      # Build completo com flags modernas (--ntp)
+      - name: Build with Maven
+        run: ./mvnw clean verify -B --no-transfer-progress
+
+      # Publicação de resultados de testes
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: always()
+        with:
+          files: target/surefire-reports/TEST-*.xml
+
+      # Upload de relatórios (útil para debug e auditoria)
+      #      - name: Upload Test Reports
+      #        uses: actions/upload-artifact@v4
+      #        if: always()
+      #        with:
+      #          name: test-reports
+      #          path: target/surefire-reports/
+
+      # (Opcional, mas moderno) - Cache explícito adicional
+#      - name: Cache Maven Repository
+#        uses: actions/cache@v4
+#        with:
+#          path: ~/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-maven-
