@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>lombok-best-practices</name>
     <description>Project Lombok Best Practices</description>
-    <url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
+    <url>https://github.com/JuhMaran/lombok-best-practices</url>
     <licenses>
         <license>
             <name>Apache License 2.0</name>
@@ -24,15 +24,21 @@
     <developers>
         <developer>
             <id>JuhMaran</id>
-            <name>Juh Maran</name>
+            <name>Juliane Maran</name>
+            <email>julianemaran@gmail.com</email>
             <url>https://github.com/JuhMaran</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>America/Sao_Paulo</timezone>
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git</connection>
-        <developerConnection>scm:git:ssh://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git</developerConnection>
+        <connection>scm:git:https://github.com/JuhMaran/lombok-best-practices.git</connection>
+        <developerConnection>scm:git:git@github.com:JuhMaran/lombok-best-practices.git</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
+        <url>https://github.com/JuhMaran/lombok-best-practices</url>
     </scm>
     <properties>
         <java.version>25</java.version>
