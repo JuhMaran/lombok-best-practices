@@ -20,9 +20,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Segurança do Maven Wrapper (best practice atual)
-      - name: Validate Maven Wrapper
-        uses: gradle/wrapper-validation-action@v2
+      - name: Validate Maven Wrapper files
+        run: |
+          test -f mvnw || exit 1
+          test -f .mvn/wrapper/maven-wrapper.jar || exit 1
+          test -f .mvn/wrapper/maven-wrapper.properties || exit 1        
 
       # Java mais recente LTS (25)
       - name: Setup Java 25 (LTS)
@@ -39,7 +41,7 @@ jobs:
 
       # Build completo com flags modernas (--ntp)
       - name: Build with Maven
-        run: ./mvnw clean verify -B --no-transfer-progess
+        run: ./mvnw clean verify -B --no-transfer-progress
 
       # Publicação de resultados de testes
       - name: Publish Test Results
